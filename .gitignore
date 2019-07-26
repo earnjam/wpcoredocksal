@@ -1,0 +1,10 @@
+# IDE Files
+.idea
+.code-workspace
+
+# Local Overrides
+.docksal/docksal-local.env
+.docksal/docksal-local.yml
+
+# WordPress Develop
+wordpress-develop/
