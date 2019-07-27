@@ -2,8 +2,11 @@ version: "2.1"
 
 services:
   cli:
+    # Extend the stock cli image (see .docksal/services/cli/Dockerfile)
+    image: wpdevelop/cli
+    build: services/cli
     environment:
-      # Pass additional variables (used in custom commands, e.g. init-site) from host to cli
+      # Pass additional variables (used in custom commands, e.g. init) from host to cli
       - MYSQL_ROOT_PASSWORD
       - MYSQL_USER
       - MYSQL_PASSWORD

@@ -49,7 +49,6 @@ echo -e "${green_bg} Step 5 ${NC}${green} Installing Site...${NC}"
 fin install-wp
 
 echo -e "${green_bg} Step 6 ${NC}${green} Setting Up Unit Testing Infrastructure...${NC}"
-fin install-phpunit
 echo -e "${green}Creating Test Database...${NC}"
 fin db create wordpress_unit_tests
 echo -e "${green}Installing Test Config...${NC}"
