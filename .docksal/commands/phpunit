@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+## Runs phpunit
+##
+## Usage: fin phpunit [params to passthrough]
+
+cd ${PROJECT_ROOT}/wordpress-develop
+fin exec phpunit $1

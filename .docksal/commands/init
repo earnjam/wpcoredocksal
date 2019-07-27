@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+## Initialize stack and site (full reset)
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions --------------------------------
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[1;97;42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+#-------------------------- Execution --------------------------------
+
+# Stack initialization
+echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
+fin project reset -f
+
+echo -e "${green_bg} Step 2 ${NC}${green} Cloning WordPress Develop...${NC}"
+rm -rf ${PROJECT_ROOT}/wordpress-develop
+git clone git://develop.git.wordpress.org/ wordpress-develop
+
+echo -e "${green_bg} Step 3 ${NC}${green} Installing Dependencies...${NC}"
+cd ${PROJECT_ROOT}/wordpress-develop
+fin exec npm install
+
+
+echo -e "${green_bg} Step 4 ${NC}${green} Building WordPress...${NC}"
+cd ${PROJECT_ROOT}/wordpress-develop
+# Build into build directory
+fin exec npm run build
+# Build back into src too
+fin exec npm run dev
+
+# Site initialization
+echo -e "${green_bg} Step 5 ${NC}${green} Installing Site...${NC}"
+# This runs inside cli using http://docs.docksal.io/en/v1.4.0/fin/custom-commands/#executing-commands-inside-cli
+fin install-wp
+
+echo -e "${green_bg} Step 6 ${NC}${green} Setting Up Unit Testing Infrastructure...${NC}"
+fin install-phpunit
+echo -e "${green}Creating Test Database...${NC}"
+fin db create wordpress_unit_tests
+echo -e "${green}Installing Test Config...${NC}"
+cp ${PROJECT_ROOT}/includes/wp-tests-config.php ${PROJECT_ROOT}/wordpress-develop/wp-tests-config.php
+echo -e "${green}Installing WordPress Importer Plugin...${NC}"
+cd ${PROJECT_ROOT}/wordpress-develop/tests/phpunit/data/plugins
+wget https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip
+unzip wordpress-importer.0.6.4.zip
+rm -f wordpress-importer.0.6.4.zip
+
+echo -e "\n${green_bg} DONE! ${NC}${green} Completed all setup steps.${NC}\n\n"
+echo -e "Open ${yellow}http://develop.wp/${NC} in your browser to view the environment dashboard and available tools."
+
+#-------------------------- END: Execution --------------------------------
