@@ -29,3 +29,8 @@ services:
       - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
     labels:
       - io.docksal.virtual-host=pma.${VIRTUAL_HOST}
+  web:
+    environment:
+      - NGINX_VHOST_PRESET=wordpress
+      - NGINX_SERVER_ROOT=/var/www
+      - NGINX_FCGI_HOST_PORT=cli:9000
