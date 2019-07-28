@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+## Toggles Xdebug on/off
+##
+## Usage: fin xdebug [on/off]
+
+case "$1" in
+	off)
+		fin config set --env=local XDEBUG_ENABLED=0
+		echo "Xdebug disabled"
+		;;
+	*)
+		fin config set --env=local XDEBUG_ENABLED=1
+		echo "Xdebug enabled"
+		;;
+esac
+
+fin project restart cli
