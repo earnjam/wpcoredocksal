@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+#: exec_target = cli
+
 ## Applies a patch from WordPress Trac based on URL
 ##
 ## Usage: fin patch [url of Trac patch/diff]
 
-cd ${DOCROOT}/src/
+cd ${DOCROOT}/wordpress-develop
 curl "$1?format=raw" | patch -p0
