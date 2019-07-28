@@ -1,5 +1,5 @@
 # WordPress Develop Docksal
-A Docker-based WordPress development environment built using Docksal.
+A Docker-based WordPress core development environment built using Docksal.
 
 ## Default Environment
 - PHP 7.2
