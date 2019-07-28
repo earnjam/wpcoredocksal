@@ -28,3 +28,19 @@ Usage: `fin <command> <options>`
 - `patch` - Applys a patch directly from Trac
 - `phpunit` - Run PHPUnit tests without having to install PHPUnit on your machine, or SSH into a VM
 - `xdebug` - Toggle Xdebug on and off
+
+## Installation
+1. Install Docksal - https://docs.docksal.io/getting-started/setup/
+2. Clone this repo
+```bash
+git clone git@github.com:earnjam/wpcoredocksal.git
+```
+
+3. Switch into the repository directory
+```bash
+cd wpcoredocksal
+```
+4. Initialize the project
+```bash
+fin init
+```
