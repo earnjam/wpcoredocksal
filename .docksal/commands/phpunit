@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-## Runs phpunit
+## Runs PHPUnit Tests for core
 ##
-## Usage: fin phpunit [params to passthrough]
+## Usage: fin phpunit [params to pass through]
 
 cd ${PROJECT_ROOT}/wordpress-develop
 fin exec phpunit $1
