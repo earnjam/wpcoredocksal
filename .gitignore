@@ -6,5 +6,8 @@
 .docksal/docksal-local.env
 .docksal/docksal-local.yml
 
+# Don't commit certificates
+.docksal/certs/
+
 # WordPress Develop
 wordpress-develop/
