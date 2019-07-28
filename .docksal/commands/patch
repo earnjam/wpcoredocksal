@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+## Applies a patch from WordPress Trac based on URL
+##
+## Usage: fin patch [url of Trac patch/diff]
+
+cd ${DOCROOT}/src/
+curl "$1?format=raw" | patch -p0
